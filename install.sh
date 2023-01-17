@@ -366,7 +366,7 @@ function modify_port() {
 }
 
 function configure_xray() {
-  cd /usr/local/etc/xray && rm -f config.json && wget -O config.json https://raw.githubusercontent.com/wulabing/Xray_onekey/${github_branch}/config/xray_xtls-rprx-direct.json
+  cd /usr/local/etc/xray && rm -f config.json && wget -O config.json https://raw.githubusercontent.com/abelyuan00/Xray_onekey_with_traffic/main/config/xray_xtls-rprx-direct.json
   modify_UUID
   modify_port
 }
@@ -383,6 +383,8 @@ function configure_xray_ws() {
 function xray_install() {
   print_ok "安装 Xray"
   curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh | bash -s -- install
+  wget -O traffic.sh https://raw.githubusercontent.com/abelyuan00/Xray_onekey_with_traffic/main/config/traffic.sh
+  chmod 755 traffic.sh
   judge "Xray 安装"
 
   # 用于生成 Xray 的导入链接
