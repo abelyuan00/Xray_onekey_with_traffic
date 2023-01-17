@@ -4,6 +4,27 @@
     "error": "/var/log/xray/error.log",
     "loglevel": "warning"
   },
+   "stats": {},
+    "api": {
+        "tag": "api",
+        "services": [
+            "StatsService"
+        ]
+          },
+  "policy": {
+      "levels": {
+          "0": {
+              "statsUserUplink": true,
+              "statsUserDownlink": true
+          }
+      },
+      "system": {
+          "statsInboundUplink": true,
+          "statsInboundDownlink": true,
+          "statsOutboundUplink": true,
+          "statsOutboundDownlink": true
+      }
+  },
   "inbounds": [
     {
       "port": 443,
@@ -11,6 +32,7 @@
       "settings": {
         "clients": [
           {
+            "email":"user-1st",
             "id": "xx",
             "flow": "xtls-rprx-direct"
           }
@@ -53,11 +75,32 @@
           "tls"
         ]
       }
-    }
+    },
+      {
+          "listen": "127.0.0.1",
+          "port": 4431,
+          "protocol": "dokodemo-door",
+          "settings": {
+              "address": "127.0.0.1"
+          },
+          "tag": "api"
+      }
   ],
   "outbounds": [
     {
       "protocol": "freedom"
     }
-  ]
+  ],
+    "routing": {
+      "rules": [
+          {
+              "inboundTag": [
+                  "api"
+              ],
+              "outboundTag": "api",
+              "type": "field"
+          }
+      ],
+      "domainStrategy": "AsIs"
+  }
 }
