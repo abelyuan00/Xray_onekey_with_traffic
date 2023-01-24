@@ -78,7 +78,7 @@
     },
       {
           "listen": "127.0.0.1",
-          "port": 4431,
+          "port": 22,
           "protocol": "dokodemo-door",
           "settings": {
               "address": "127.0.0.1"
