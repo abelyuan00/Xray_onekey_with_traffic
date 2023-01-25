@@ -1,6 +1,7 @@
 在原脚本的基础上增加了流量统计的脚本和配置
 详情见 https://xtls.github.io/document/level-2/traffic_stats.html#%E6%9F%A5%E7%9C%8B%E6%B5%81%E9%87%8F%E4%BF%A1%E6%81%AF
-流量统计详情可在根目录直接运训traffic.sh脚本即可
+
+流量统计详情可在xray目录traffic.sh脚本即可
 
 
 ### 安装/更新方式（Nginx 前置）
