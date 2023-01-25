@@ -360,7 +360,7 @@ function modify_port() {
     exit 1
   fi
   port_exist_check $PORT
-  cat ${xray_conf_dir}/config.json | jq 'setpath(["inbounds",0,"port"];'${PORT}')' >${xray_conf_dir}/config_tmp.json
+  cat ${xray_conf_dir}/config.json | jq 'setpath(["inbounds",0,"port"];'${PORT}')' | jq 'setpath(["inbounds",1,"port"];'${PORT}')' >${xray_conf_dir}/config_tmp.json
   xray_tmp_config_file_check_and_use
   judge "Xray 端口 修改"
   sed -i '/s/_APISERVER=.*/_APISERVER=127.0.0.1:'$PORT'/' traffic.sh
