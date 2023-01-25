@@ -363,7 +363,7 @@ function modify_port() {
   cat ${xray_conf_dir}/config.json | jq 'setpath(["inbounds",0,"port"];'${PORT}')' | jq 'setpath(["inbounds",1,"port"];'${PORT}')' >${xray_conf_dir}/config_tmp.json
   xray_tmp_config_file_check_and_use
   judge "Xray 端口 修改"
-  sed -i '/s/_APISERVER=.*/_APISERVER=127.0.0.1:'$PORT'/' traffic.sh
+  sed -i '/s/_APISERVER=.*/_APISERVER=127.0.0.1:'$PORT'/' ${xray_conf_dir}/traffic.sh
   print_ok "流量统计脚本修改完成"
 }
 
@@ -385,7 +385,7 @@ function configure_xray_ws() {
 function xray_install() {
   print_ok "安装 Xray"
   curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh | bash -s -- install
-  wget -O traffic.sh https://raw.githubusercontent.com/abelyuan00/Xray_onekey_with_traffic/main/config/traffic.sh
+  wget  https://raw.githubusercontent.com/abelyuan00/Xray_onekey_with_traffic/main/config/traffic.sh -P /usr/local/etc/xray/
   chmod 755 traffic.sh
   judge "Xray 安装"
 
