@@ -39,6 +39,14 @@ print_sum() {
     | column -t
 }
 
+
+CURRENT_DAY=$(date +%d)
+
+if [ $CURRENT_DAY -eq 1 ]; then
+  print_sum "$DATA" "reset"
+fi
+
+
 DATA=$(apidata $1)
 echo "------------Inbound----------"
 print_sum "$DATA" "inbound"
