@@ -41,6 +41,7 @@ print_sum() {
 
 CURRENT_DAY=$(date +%d)
 
+# Clear all the useage data at the start of the month
 if [ $CURRENT_DAY -eq 1 ]; then
   DATA=$(apidata "reset")
 else
