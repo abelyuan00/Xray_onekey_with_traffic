@@ -3,6 +3,8 @@
 
 流量统计详情可在xray目录traffic.sh脚本即可
 
+如果想要自动运行traffic.sh脚本请使用cron等命令添加定时任务
+
 
 ### 安装/更新方式（Nginx 前置）
 
