@@ -746,6 +746,7 @@ menu() {
   echo -e "${Green}11.${Font} 变更 UUID"
   echo -e "${Green}13.${Font} 变更 连接端口"
   echo -e "${Green}14.${Font} 变更 WebSocket PATH"
+  echo -e "${Green}15.${Font} 新增用户"
   echo -e "—————————————— 查看信息 ——————————————"
   echo -e "${Green}21.${Font} 查看 实时访问日志"
   echo -e "${Green}22.${Font} 查看 实时错误日志"
