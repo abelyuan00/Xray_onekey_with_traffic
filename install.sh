@@ -387,6 +387,14 @@ new_contents=$(cat ${xray_conf_dir}/config.json | jq '.inbounds[0].settings.clie
 
 echo $new_contents > ${xray_conf_dir}/config.json
 
+print_ok "URL 链接 (VLESS + TCP + XTLS)"
+UUID=$(cat ${xray_conf_dir}/config.json | jq .inbounds[0].settings.clients[1].id | tr -d '"')
+PORT=$(cat ${xray_conf_dir}/config.json | jq .inbounds[0].port)
+FLOW=$(cat ${xray_conf_dir}/config.json | jq .inbounds[0].settings.clients[1].flow | tr -d '"')
+DOMAIN=$(cat ${domain_tmp_dir}/domain)
+
+print_ok "vless://$UUID@$DOMAIN:$PORT?security=xtls&flow=$FLOW#XTLS_wulabing-$DOMAIN"
+
 }
 
 
