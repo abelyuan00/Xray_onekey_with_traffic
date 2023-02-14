@@ -394,6 +394,7 @@ FLOW=$(cat ${xray_conf_dir}/config.json | jq .inbounds[0].settings.clients[1].fl
 DOMAIN=$(cat ${domain_tmp_dir}/domain)
 
 print_ok "vless://$UUID@$DOMAIN:$PORT?security=xtls&flow=$FLOW#XTLS_wulabing-$DOMAIN"
+print_ok "请手动重启xray服务使新用户生效"
 
 }
 
