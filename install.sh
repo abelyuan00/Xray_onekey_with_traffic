@@ -353,6 +353,7 @@ function configure_nginx() {
 }
 
 function modify_port() {
+  
   read -rp "请输入端口号(默认：443)：" PORT
   [ -z "$PORT" ] && PORT="443"
   if [[ $PORT -le 0 ]] || [[ $PORT -gt 65535 ]]; then
@@ -363,7 +364,7 @@ function modify_port() {
   cat ${xray_conf_dir}/config.json | jq 'setpath(["inbounds",0,"port"];'${PORT}')' | jq 'setpath(["inbounds",1,"port"];'${PORT}')' >${xray_conf_dir}/config_tmp.json
   xray_tmp_config_file_check_and_use
   judge "Xray 端口 修改"
-  sed -i '/s/_APISERVER=.*/_APISERVER=127.0.0.1:'$PORT'/' ${xray_conf_dir}/traffic.sh
+  sed -i '/_APISERVER=.*/s//_APISERVER=127.0.0.1:'$PORT'/' ${xray_conf_dir}/traffic.sh
   print_ok "流量统计脚本修改完成"
 }
 
@@ -408,7 +409,7 @@ function xray_install() {
   print_ok "安装 Xray"
   curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh | bash -s -- install
   wget  https://raw.githubusercontent.com/abelyuan00/Xray_onekey_with_traffic/main/config/traffic.sh -P /usr/local/etc/xray/
-  chmod 755 /usr/local/etc/xray/traffic.sh
+  
   judge "Xray 安装"
 
   # 用于生成 Xray 的导入链接
