@@ -10,6 +10,9 @@
 
 安装时会一并修改脚本中的对于端口，对于多个用户的流量统计流量统计脚本也会一并给出，脚本会在每月一号时清空本月流量详情（需设置cron等定时任务）
 
+This script have added several functions, in addition to the original one-key script, that allows you to monitor the data utilization from all users and add new users.
+If you need an English information about this script please email me.
+
 
 
 
