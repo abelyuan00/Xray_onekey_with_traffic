@@ -367,6 +367,28 @@ function modify_port() {
   print_ok "流量统计脚本修改完成"
 }
 
+function add_new_user(){
+  random_string=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 10 | head -n 1)
+  read -rp "请输入新增的用户名或使用随机用户名: " user_new
+  user_new=${user_new:-user-$random_string}
+  read -rp "请输入新增用户的UUID或者使用随机生成UUID: " new_uuid
+  new_uuid=${new_uuid:-$(cat /proc/sys/kernel/random/uuid)}
+  flow="xtls-rprx-direct"
+
+  file_contents=$(cat ${xray_conf_dir}/config.json)
+
+# use jq to add the new client to the inbounds section of the file
+new_contents=$(cat ${xray_conf_dir}/config.json | jq '.inbounds[0].settings.clients += [{
+            "email": "'$user_new'",
+            "id": "'$new_uuid'",
+            "flow": "'$flow'"
+          }]')
+
+echo $new_contents > ${xray_conf_dir}/config.json
+
+}
+
+
 function configure_xray() {
   cd /usr/local/etc/xray && rm -f config.json && wget -O config.json https://raw.githubusercontent.com/abelyuan00/Xray_onekey_with_traffic/main/config/xray_xtls-rprx-direct.json
   modify_UUID
@@ -761,6 +783,9 @@ menu() {
       print_error "当前模式不是 Websocket 模式"
     fi
     ;;
+  15)
+    add_new_user
+  ;;
   21)
     tail -f $xray_access_log
     ;;
