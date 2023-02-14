@@ -408,7 +408,7 @@ function xray_install() {
   print_ok "安装 Xray"
   curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh | bash -s -- install
   wget  https://raw.githubusercontent.com/abelyuan00/Xray_onekey_with_traffic/main/config/traffic.sh -P /usr/local/etc/xray/
-  chmod 755 traffic.sh
+  chmod 755 /usr/local/etc/xray/traffic.sh
   judge "Xray 安装"
 
   # 用于生成 Xray 的导入链接
@@ -703,6 +703,7 @@ function install_xray() {
   basic_information
 }
 function install_xray_ws() {
+
   is_root
   system_check
   dependency_install
