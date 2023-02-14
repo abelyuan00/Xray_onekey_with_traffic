@@ -2,7 +2,7 @@
 
 #====================================================
 #	System Request:Debian 9+/Ubuntu 18.04+/Centos 7+
-#	Author:	wulabing
+#	Author:	wulabing/abelyuan
 #	Dscription: Xray onekey Management
 #	email: admin@wulabing.com
 #====================================================
