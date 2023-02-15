@@ -14,7 +14,7 @@ This script have added several functions, in addition to the original one-key sc
 
 The original script is for setting up a network proxy server without understanding the details, in order to get access to censored websites.
 
-If you need more English information about this script please email me.
+If you need more English information about this script please [email me](mailto:abelyuan0822@gmail.com).
 
 
 
