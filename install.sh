@@ -387,13 +387,13 @@ new_contents=$(cat ${xray_conf_dir}/config.json | jq '.inbounds[0].settings.clie
 
 echo $new_contents > ${xray_conf_dir}/config.json
 
-print_ok "URL 链接 (VLESS + TCP + XTLS)"
+print_ok "URL 链接 (VLESS + TCP + TLS)"
 UUID=$(cat ${xray_conf_dir}/config.json | jq .inbounds[0].settings.clients[1].id | tr -d '"')
 PORT=$(cat ${xray_conf_dir}/config.json | jq .inbounds[0].port)
 FLOW=$(cat ${xray_conf_dir}/config.json | jq .inbounds[0].settings.clients[1].flow | tr -d '"')
 DOMAIN=$(cat ${domain_tmp_dir}/domain)
 
-print_ok "vless://$UUID@$DOMAIN:$PORT?security=xtls&flow=$FLOW#XTLS_wulabing-$DOMAIN"
+print_ok "vless://$UUID@$DOMAIN:$PORT?security=tls&flow=$FLOW#XTLS_wulabing-$DOMAIN"
 print_ok "请手动重启xray服务使新用户生效"
 
 }
@@ -592,14 +592,10 @@ function vless_xtls-rprx-direct_link() {
   print_ok "URL 链接 (VLESS + TCP + TLS)"
   print_ok "vless://$UUID@$DOMAIN:$PORT?security=tls&flow=$FLOW#TLS_wulabing-$DOMAIN"
 
-  print_ok "URL 链接 (VLESS + TCP + XTLS)"
-  print_ok "vless://$UUID@$DOMAIN:$PORT?security=xtls&flow=$FLOW#XTLS_wulabing-$DOMAIN"
   print_ok "-------------------------------------------------"
   print_ok "URL 二维码 (VLESS + TCP + TLS) （请在浏览器中访问）"
   print_ok "https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=vless://$UUID@$DOMAIN:$PORT?security=tls%26flow=$FLOW%23TLS_wulabing-$DOMAIN"
 
-  print_ok "URL 二维码 (VLESS + TCP + XTLS) （请在浏览器中访问）"
-  print_ok "https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=vless://$UUID@$DOMAIN:$PORT?security=xtls%26flow=$FLOW%23XTLS_wulabing-$DOMAIN"
 }
 
 function vless_xtls-rprx-direct_information() {
@@ -740,7 +736,7 @@ menu() {
   echo -e "当前已安装版本：${shell_mode}"
   echo -e "—————————————— 安装向导 ——————————————"""
   echo -e "${Green}0.${Font}  升级 脚本"
-  echo -e "${Green}1.${Font}  安装 Xray (VLESS + TCP + XTLS / TLS + Nginx)"
+  echo -e "${Green}1.${Font}  安装 Xray (VLESS + TCP + TLS + Nginx)"
   echo -e "${Green}2.${Font}  安装 Xray (VLESS + TCP + XTLS / TLS + Nginx 及 VLESS + TCP + TLS + Nginx + WebSocket 回落并存模式)"
   echo -e "—————————————— 配置变更 ——————————————"
   echo -e "${Green}11.${Font} 变更 UUID"
