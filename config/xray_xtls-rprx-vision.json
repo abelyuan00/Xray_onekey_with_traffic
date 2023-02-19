@@ -34,7 +34,7 @@
           {
             "email":"user-1st",
             "id": "xx",
-            "flow": "xtls-rprx-direct"
+            "flow": "xtls-rprx-vision"
           }
         ],
         "decryption": "none",
@@ -53,8 +53,8 @@
       },
       "streamSettings": {
         "network": "tcp",
-        "security": "xtls",
-        "xtlsSettings": {
+        "security": "tls",
+        "tlsSettings": {
           "minVersion": "1.2",
           "certificates": [
             {

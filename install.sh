@@ -374,7 +374,7 @@ function add_new_user(){
   user_new=${user_new:-user-$random_string}
   read -rp "请输入新增用户的UUID或者使用随机生成UUID: " new_uuid
   new_uuid=${new_uuid:-$(cat /proc/sys/kernel/random/uuid)}
-  flow="xtls-rprx-direct"
+  flow="xtls-rprx-vision"
 
   file_contents=$(cat ${xray_conf_dir}/config.json)
 
@@ -400,7 +400,7 @@ print_ok "请手动重启xray服务使新用户生效"
 
 
 function configure_xray() {
-  cd /usr/local/etc/xray && rm -f config.json && wget -O config.json https://raw.githubusercontent.com/abelyuan00/Xray_onekey_with_traffic/main/config/xray_xtls-rprx-direct.json
+  cd /usr/local/etc/xray && rm -f config.json && wget -O config.json https://raw.githubusercontent.com/abelyuan00/Xray_onekey_with_traffic/main/config/xray_xtls-rprx-vision.json
   modify_UUID
   modify_port
 }
