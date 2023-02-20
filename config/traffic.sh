@@ -25,6 +25,7 @@ apidata () {
 }
 
 print_sum() {
+    echo "----" "$(date +%Y) $(date +%m) $(date +%d)" "----"
     local DATA="$1"
     local PREFIX="$2"
     local SORTED=$(echo "$DATA" | grep "^${PREFIX}" | sort -r)
@@ -37,6 +38,7 @@ print_sum() {
     echo -e "${SORTED}\n${SUM}" \
     | numfmt --field=2 --suffix=B --to=iec \
     | column -t
+    echo
 }
 
 CURRENT_DAY=$(date +%d)
@@ -48,13 +50,15 @@ else
   DATA=$(apidata "$1")
 fi
 
-echo "------------Inbound----------"
-print_sum "$DATA" "inbound"
-echo "-----------------------------"
-echo "------------Outbound----------"
-print_sum "$DATA" "outbound"
-echo "-----------------------------"
-echo
-echo "-------------User------------"
+
+
+# echo "------------Inbound----------" "$(date +%Y) $(date +%m) $(date +%d)"
+# print_sum "$DATA" "inbound"
+# echo "-----------------------------"
+# echo "------------Outbound----------" "$(date +%Y) $(date +%m) $(date +%d)"
+# print_sum "$DATA" "outbound"
+# echo "-----------------------------"
+# echo
 print_sum "$DATA" "user"
-echo "-----------------------------"
+print_sum "$DATA" "user" >> /usr/local/etc/xray/data_usage.txt
+
