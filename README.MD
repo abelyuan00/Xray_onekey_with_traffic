@@ -2,6 +2,8 @@
 改动：
 2/19 将使用xtls-rprx-direct 改为了使用xtls-rprx-vision
 
+如需在ios等设备上使用需将“flow”参数改为："xray-rprx-direct,none"
+
 在原脚本的基础上增加了(仅针对XTLS加密方式的)流量统计的脚本和配置，也增加了多用户添加的命令
 
 详情见 https://xtls.github.io/document/level-2/traffic_stats.html#%E6%9F%A5%E7%9C%8B%E6%B5%81%E9%87%8F%E4%BF%A1%E6%81%AF
