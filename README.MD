@@ -44,9 +44,9 @@ wget -N --no-check-certificate -q -O install.sh "https://raw.githubusercontent.c
 
 支持配置方式
 
-- VLESS + TCP + XTLS / TLS  + Nginx
+- VLESS + TCP + TLS (flow: xray-rprx-vision)  + Nginx
 
-- VLESS + TCP + XTLS / TLS  + Nginx 及 VLESS + TCP + TLS + Nginx + WebSocket 回落并存模式
+- VLESS + TCP + XTLS (flow: xray-rprx-direct) + Nginx
 
 ```
 wget -N --no-check-certificate -q -O install.sh "https://raw.githubusercontent.com/abelyuan00/Xray_onekey_with_traffic/main/install.sh" && chmod +x install.sh && bash install.sh
