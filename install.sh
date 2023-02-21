@@ -405,6 +405,13 @@ function configure_xray() {
   modify_port
 }
 
+function configure_xray_direct() {
+  echo "新版本可能会淘汰direct 流控请考虑使用vision"
+  cd /usr/local/etc/xray && rm -f config.json && wget -O config.json https://raw.githubusercontent.com/abelyuan00/Xray_onekey_with_traffic/main/config/xray_xtls-rprx-direct.json
+  modify_UUID
+  modify_port
+}
+
 function configure_xray_ws() {
   cd /usr/local/etc/xray && rm -f config.json && wget -O config.json https://raw.githubusercontent.com/wulabing/Xray_onekey/${github_branch}/config/xray_tls_ws_mix-rprx-direct.json
   modify_UUID
@@ -587,10 +594,11 @@ function vless_xtls-rprx-direct_link() {
   UUID=$(cat ${xray_conf_dir}/config.json | jq .inbounds[0].settings.clients[0].id | tr -d '"')
   PORT=$(cat ${xray_conf_dir}/config.json | jq .inbounds[0].port)
   FLOW=$(cat ${xray_conf_dir}/config.json | jq .inbounds[0].settings.clients[0].flow | tr -d '"')
+  SECURITY=$(cat ${xray_conf_dir}/config.json | jq .inbounds[0].streamSettings.security)
   DOMAIN=$(cat ${domain_tmp_dir}/domain)
 
   print_ok "URL 链接 (VLESS + TCP + TLS)"
-  print_ok "vless://$UUID@$DOMAIN:$PORT?security=tls&flow=$FLOW#TLS_wulabing-$DOMAIN"
+  print_ok "vless://$UUID@$DOMAIN:$PORT?security=$SECURITY&flow=$FLOW#TLS_wulabing-$DOMAIN"
 
   print_ok "-------------------------------------------------"
   print_ok "URL 二维码 (VLESS + TCP + TLS) （请在浏览器中访问）"
@@ -708,7 +716,7 @@ function install_xray() {
   restart_all
   basic_information
 }
-function install_xray_ws() {
+function install_xray_direct() {
 
   is_root
   system_check
@@ -717,27 +725,24 @@ function install_xray_ws() {
   domain_check
   port_exist_check 80
   xray_install
-  configure_xray_ws
+  configure_xray_direct
   nginx_install
   configure_nginx
   configure_web
   generate_certificate
   ssl_judge_and_install
   restart_all
-  basic_ws_information
+  basic_information
 }
 menu() {
   update_sh
   shell_mode_check
-  echo -e "\t Xray 安装管理脚本 ${Red}[${shell_version}]${Font}"
-  echo -e "\t---authored by wulabing---"
-  echo -e "\thttps://github.com/wulabing\n"
 
   echo -e "当前已安装版本：${shell_mode}"
   echo -e "—————————————— 安装向导 ——————————————"""
   echo -e "${Green}0.${Font}  升级 脚本"
-  echo -e "${Green}1.${Font}  安装 Xray (VLESS + TCP + TLS + Nginx)"
-  echo -e "${Green}2.${Font}  安装 Xray (VLESS + TCP + XTLS / TLS + Nginx 及 VLESS + TCP + TLS + Nginx + WebSocket 回落并存模式)"
+  echo -e "${Green}1.${Font}  安装 Xray (VLESS + TCP + TLS / (xtls-rprx-vision) + Nginx)"
+  echo -e "${Green}2.${Font}  安装 Xray (VLESS + TCP + XTLS / (xtls-rprx-direct) + Nginx)"
   echo -e "—————————————— 配置变更 ——————————————"
   echo -e "${Green}11.${Font} 变更 UUID"
   echo -e "${Green}13.${Font} 变更 连接端口"
@@ -765,7 +770,7 @@ menu() {
     install_xray
     ;;
   2)
-    install_xray_ws
+    install_xray_direct
     ;;
   11)
     read -rp "请输入 UUID:" UUID
