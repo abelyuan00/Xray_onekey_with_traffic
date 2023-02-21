@@ -594,7 +594,7 @@ function vless_xtls-rprx-direct_link() {
   UUID=$(cat ${xray_conf_dir}/config.json | jq .inbounds[0].settings.clients[0].id | tr -d '"')
   PORT=$(cat ${xray_conf_dir}/config.json | jq .inbounds[0].port)
   FLOW=$(cat ${xray_conf_dir}/config.json | jq .inbounds[0].settings.clients[0].flow | tr -d '"')
-  SECURITY=$(cat ${xray_conf_dir}/config.json | jq .inbounds[0].streamSettings.security)
+  SECURITY=$(cat ${xray_conf_dir}/config.json | jq .inbounds[0].streamSettings.security | tr -d '"')
   DOMAIN=$(cat ${domain_tmp_dir}/domain)
 
   print_ok "URL 链接 (VLESS + TCP + TLS)"
