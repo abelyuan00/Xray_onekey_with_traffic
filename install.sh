@@ -374,7 +374,7 @@ function add_new_user(){
   user_new=${user_new:-user-$random_string}
   read -rp "请输入新增用户的UUID或者使用随机生成UUID: " new_uuid
   new_uuid=${new_uuid:-$(cat /proc/sys/kernel/random/uuid)}
-  flow="xtls-rprx-vision"
+  flow="xtls-rprx-direct"
 
   file_contents=$(cat ${xray_conf_dir}/config.json)
 
